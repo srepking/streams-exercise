@@ -62,6 +62,18 @@ class StreamProcessor(object):
         # stream using the following code:
         #
         # digits = self._stream.read(2)
+        with self._stream as f:
+            while True:
+                digits = f.read(2)
+                if not digits:
+                    break
+                if len(digits) < 2:
+                    break
+                count += 1
+                total = total + int(digits)
+                if count == 10 or (total) >= 200:
+                    break
 
 
-        return count
+
+        return (count)
